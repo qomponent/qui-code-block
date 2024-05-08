@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+  <head>
+    <title>Code block web component demo</title>
+    <script type="module" src="./qui-code-block.js"></script>
+    <style>
+        .inout {
+          display: flex;
+          gap:10px;
+          justify-content: stretch;
+          width: 100%;
+        }
+        .card {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+    </style>
+
+  </head>
+  <body>
+    <h1>Code Block</h1>
+
+    There are 3 ways to provide the code:
+    
+      <ol>
+        <li><a href="#providing_content">Providing content as a child (inside slot)</a>
+        <li><a href="#remote_content">Get remote content from a URL</a>
+        <li><a href="#attribute_compatible">Providing content in a attribute</a>  
+      </ol>
+    
+    Code block can be <a href="#editable">editable</a>
+    <br/>
+    Theme options:  
+    <label>
+        <input type="radio" name="themeGroup" value="dark" checked> Dark
+    </label>
+    <label>
+        <input type="radio" name="themeGroup" value="light"> Light
+    </label>
+
+    <h3 id="providing_content">Providing content as a child (inside slot)</h3>
+
+    <h4>Properties:</h4>
+
+    <div class="inout">
+      <div class="card">
+    This code:
+    <qui-code-block mode="html" theme="dark">
+      <slot>
+&lt;qui-code-block mode="properties" theme="dark"&gt;
+  &lt;slot&gt;
+    foo = bar
+  &lt;/slot&gt;
+&lt;/qui-code-block&gt;
+      </slot>
+    </qui-code-block>
+      </div>
+
+      <div class="card">
+    Will create this output:
+    <qui-code-block mode="properties" theme="dark" class="toggle">
+      <slot>
+foo = bar
+      </slot>
+    </qui-code-block>
+    </div>
+    </div>
+
+    <br/>
+    
+    <h4>JavaScript:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="js" theme="dark"&gt;
+  &lt;slot&gt;
+    const foo = "bar";
+  &lt;/slot&gt;
+&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="js" theme="dark" class="toggle">
+          <slot>
+const foo = "bar";
+          </slot>
+        </qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+
+    <h4>Java:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="java" theme="dark"&gt;
+  &lt;slot&gt;
+    private String foo = "bar";
+  &lt;/slot&gt;
+&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="java" theme="dark" class="toggle">
+          <slot>
+private String foo = "bar";
+          </slot>
+        </qui-code-block>
+      </div>
+    </div>
+    
+    <br/>
+
+    <h4>XML:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="xml"  theme="dark" showLineNumbers&gt;
+  &lt;slot&gt;
+    &amp;lt;foo&amp;gt;
+    bar
+    &amp;lt;/foo&amp;gt;
+  &lt;/slot&gt;
+&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="xml"  theme="dark" class="toggle" showLineNumbers>
+          <slot>
+&lt;foo&gt;
+  bar
+&lt;/foo&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+
+    <h4>Json:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="json" theme="dark"&gt;
+  &lt;slot&gt;
+    {
+    "foo":"bar"
+    }
+  &lt;/slot&gt;
+&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="json" theme="dark" class="toggle">
+          <slot>
+{
+  "foo":"bar"
+}
+          </slot>
+        </qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+
+    <h4>Yaml:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="yaml" theme="dark"&gt;
+  &lt;slot&gt;
+    ---
+    foo: 'bar'
+  &lt;/slot&gt;
+&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="yaml" theme="dark" class="toggle">
+          <slot>
+---
+foo: 'bar'
+          </slot>
+        </qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+
+    <h4>SQL:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="sql" theme="dark"&gt;
+  &lt;slot&gt;
+    select foo from bar;
+  &lt;/slot&gt;
+&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="sql" theme="dark" class="toggle">
+          <slot>
+select foo from bar;
+          </slot>
+      </qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+
+    <h4>CSS:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="css" theme="dark"&gt;
+  &lt;slot&gt;
+    .foo {
+      display: flex;
+    }
+  &lt;/slot&gt;
+&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="css" theme="dark" class="toggle">
+          <slot>
+.foo {
+  display: flex;
+}
+          </slot>
+      </qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+
+    <h4>SASS:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="sass" theme="dark"&gt;
+  &lt;slot&gt;
+    $bar: flex;
+
+    .foo {
+      display: $bar
+    }
+  &lt;/slot&gt;
+&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="sass" theme="dark" class="toggle">
+          <slot>
+$bar: flex;
+
+.foo {
+  display: $bar
+}
+          </slot>
+      </qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+
+    <h4>Markdown:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="markdown" theme="dark"&gt;
+  &lt;slot&gt;
+    # Foo
+
+    - bar
+    - baz
+  &lt;/slot&gt;
+&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="markdown" theme="dark" class="toggle">
+          <slot>
+# Foo
+
+- bar
+- baz
+          </slot>
+      </qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+
+    <hr/>
+
+    <h3 id="remote_content">Get remote content from a URL</h3>
+
+    <h4>Properties:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="properties" src="http://localhost:8080/example/example.properties" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="properties" src="http://localhost:8080/example/example.properties" theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+
+    <h4>JavaScript:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="js" src="http://localhost:8080/example/example.js" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="js" src="http://localhost:8080/example/example.js" theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+
+    <h4>Java:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="java" src="http://localhost:8080/example/example.java" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="java" src="http://localhost:8080/example/example.java" theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+    
+    <h4>XML:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="xml" src="http://localhost:8080/example/example.xml" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="xml" src="http://localhost:8080/example/example.xml" theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+
+    <h4>Json:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="json" src="http://localhost:8080/example/example.json" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="json" src="http://localhost:8080/example/example.json" theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+    
+    <h4>Yaml:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="yaml" src="http://localhost:8080/example/example.yaml" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="yaml" src="http://localhost:8080/example/example.yaml" theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+    
+    <h4>SQL:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="sql" src="http://localhost:8080/example/example.sql" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="sql" src="http://localhost:8080/example/example.sql" theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+
+    <h4>CSS:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="css" src="http://localhost:8080/example/example.css" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="css" src="http://localhost:8080/example/example.css" theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+
+    <h4>SASS:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="sass" src="http://localhost:8080/example/example.sass" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="sass" src="http://localhost:8080/example/example.sass" theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+
+    <h4>Markdown:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="markdown" src="http://localhost:8080/example/example.md" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="markdown" src="http://localhost:8080/example/example.md" theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+
+    <hr/>
+
+    <h3 id="attribute_compatible">Provide content in an attribute</h3>
+
+    <h4>Properties:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="properties" content="foo = bar" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="properties" content="foo = bar" theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+
+    <h4>JavaScript:</h4>
+    
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="js" content="const foo = 'bar';" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="js" content="const foo = 'bar';" theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+    
+    <br/>
+
+    <h4>Java:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="java" content='private String foo = "bar";' theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="java" content='private String foo = "bar";' theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+
+    <h4>XML:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="xml" content="&lt;foo&gt;
+  bar
+&lt;/foo&gt;" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="xml" content="<foo>
+  bar
+</foo>" theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+    
+    <h4>Json:</h4>
+    
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="json" content='{
+  "foo":"bar"
+}' theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="json" content='{
+  "foo":"bar"
+}' theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+
+    <h4>Yaml:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="yaml" content="---
+foo: 'bar'" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="yaml" content="---
+foo: 'bar'" theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+
+    <br/>
+    
+    <h4>SQL:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="sql" content="select foo from bar;" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="sql" content="select foo from bar;" theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+    <br/>
+
+    <h4>CSS:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="css" content=".foo {
+  display: flex;
+}" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="css" content=".foo {
+  display: flex;
+}" theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+    <br/>
+
+    <h4>SASS:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="sass" content="$bar: flex;
+
+.foo {
+  display: $bar
+}" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="sass" content="$bar: flex;
+
+.foo {
+  display: $bar
+}" theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+    <br/>
+
+    <h4>Markdown:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="markdown" content="# Foo
+
+- bar
+- baz" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="markdown" content="# Foo
+
+  - bar
+  - baz" theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+    <br/>
+
+
+    <h3 id="editable">Editable code blocks</h3>
+
+    <div class="inout">
+      <div class="card">
+    This code:
+    <qui-code-block mode="html" theme="dark">
+      <slot>
+&lt;qui-code-block mode="properties" theme="dark" editable&gt;
+  &lt;slot&gt;
+    foo = bar
+  &lt;/slot&gt;
+&lt;/qui-code-block&gt;
+      </slot>
+    </qui-code-block>
+      </div>
+
+      <div class="card">
+    Will create this output:
+    <qui-code-block mode="properties" theme="dark" class="toggle" editable>
+      <slot>
+foo = bar
+      </slot>
+    </qui-code-block>
+    <div id="content-display"> Value will appear here when Shift-Enter is pressed in the editor</div>    
+    </div>
+    </div>
+
+    
+    <br/>
+
+    <script>
+
+    document.addEventListener('shiftEnter', event => {
+        const displayDiv = document.getElementById('content-display');
+        displayDiv.innerText = event.detail.content;
+    });
+
+      document.addEventListener('DOMContentLoaded', function () {
+          const radioButtons = document.querySelectorAll('input[type="radio"][name="themeGroup"]');
+          radioButtons.forEach(radio => {
+              radio.addEventListener('change', function () {
+                  // Call the function to update attributes based on the selected value
+                  updateElementsAttribute(this.value);
+              });
+          });
+
+          function updateElementsAttribute(value) {
+              const elements = document.querySelectorAll('.toggle');
+              
+              elements.forEach(element => {
+                  element.setAttribute('theme', value);
+              });
+          }
+      });
+    </script>
+
+  </body>
+</html>
