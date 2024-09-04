@@ -1,6 +1,6 @@
 {
   "name": "@qomponent/qui-code-block",
-  "version": "1.0.17-SNAPSHOT",
+  "version": "999-SNAPSHOT",
   "description": "A Code block UI component",
   "publishConfig": {
     "access": "public"
