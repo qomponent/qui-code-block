@@ -1,6 +1,6 @@
 {
   "name": "@qomponent/qui-code-block",
-  "version": "1.0.17-SNAPSHOT",
+  "version": "999-SNAPSHOT",
   "description": "A Code block UI component",
   "publishConfig": {
     "access": "public"
@@ -34,7 +34,7 @@
     "@codemirror/lang-yaml": "~6.1.1",
     "@codemirror/state": "~6.4.1",
     "@codemirror/view": "~6.26.3",
-    "lit": "~3.1.3"
+    "lit": "~3.2.0"
   },
   "devDependencies": {
     "@web/dev-server": "^0.4.4",
