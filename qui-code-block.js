@@ -62,6 +62,7 @@ class QuiCodeBlock extends LitElement {
 
     connectedCallback() {
         super.connectedCallback();
+        this._updateSlotContent();
         if(this.src){
             // if mode is not provided, figure is out
             if(!this.mode){
@@ -83,7 +84,12 @@ class QuiCodeBlock extends LitElement {
         }else{
             this._basicTheme = basicDark;
         }
-
+        const slot = this.shadowRoot.querySelector('slot');
+        if (slot) {
+            slot.addEventListener('slotchange', () => {
+                this._updateSlotContent();
+            });
+        }
     }
 
     disconnectedCallback() {
@@ -94,13 +100,17 @@ class QuiCodeBlock extends LitElement {
     }
 
     firstUpdated() {
-        
+        this._updateSlotContent();
+    }
+
+    _updateSlotContent() {
         // See if the content is provided in a slot
         const slotValue = this.shadowRoot.getElementById('slotContent');
         if(slotValue){
             const v = slotValue.assignedNodes()[1];
             if(v && v.textContent){
                 this.content = this._removeEmptyLines(v.textContent);
+                this._updateContent();
             }
         }
 
