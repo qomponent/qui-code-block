@@ -16,6 +16,10 @@ import { StreamLanguage } from "@codemirror/language"
 import { properties } from './properties.js';
 import { asciiArmor } from './asciiarmor.js';
 import { powerShell } from './powershell.js';
+import { shell } from './shell.js';
+import { protobuf } from './protobuf.js';
+import { dockerFile } from './dockerfile.js';
+import { diff } from './diff.js';
 import { basicLight } from './lightTheme.js';
 import { basicDark } from './darkTheme.js';
 
@@ -231,7 +235,6 @@ class QuiCodeBlock extends LitElement {
         switch (this.mode) {
             case 'js':
                 return javascript();
-            case 'pom':
             case 'xml':
                 return xml();
             case 'json':
@@ -241,12 +244,16 @@ class QuiCodeBlock extends LitElement {
             case 'sql':
                 return sql();
             case 'yaml':
+            case 'yml':
                 return yaml();
             case 'html':
+            case 'xhtml':
+            case 'htm':
                 return htmlLanguage();
             case 'css':
                 return cssLanguage();
             case 'markdown':
+            case 'md':
                 return markdown();
             case 'scss':    
             case 'sass':
@@ -255,8 +262,25 @@ class QuiCodeBlock extends LitElement {
                 return StreamLanguage.define(asciiArmor);
             case 'properties':
                 return StreamLanguage.define(properties);
-            default:
+            case 'dockerFile':
+            case 'dockerfile':
+            case 'Dockerfile':
+                return StreamLanguage.define(dockerFile);
+            case 'ps1':
+            case 'psd1':
+            case 'psm1':
                 return StreamLanguage.define(powerShell);
+            case 'protobuf':
+            case 'pb':
+            case 'txtpb':
+            case 'binpb':
+                return StreamLanguage.define(protobuf);
+            case 'diff':
+            case 'difffile':
+            case 'patch':
+                return StreamLanguage.define(diff);    
+            default:
+                return StreamLanguage.define(shell);
         }
     }
 
