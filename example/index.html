@@ -770,7 +770,7 @@ foo: 'bar'" theme="dark" class="toggle"></qui-code-block>
 
       <div class="card">
     Will create this output:
-    <qui-code-block mode="properties" theme="dark" class="toggle" editable>
+    <qui-code-block id="valuechangeid" mode="properties" theme="dark" class="toggle" editable>
       <slot>
 foo = bar
       </slot>
@@ -783,6 +783,12 @@ foo = bar
     <br/>
 
     <script>
+
+    const valuechangeeditor = document.getElementById('valuechangeid');
+
+    valuechangeeditor.addEventListener('value-changed', (e) => {
+      console.log('New value:', e.detail.value);
+    });  
 
     document.addEventListener('shiftEnter', event => {
         const displayDiv = document.getElementById('content-display');
