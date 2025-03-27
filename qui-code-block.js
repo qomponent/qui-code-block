@@ -162,7 +162,13 @@ class QuiCodeBlock extends LitElement {
               ]),
             EditorView.updateListener.of((update) => {
                 if (update.docChanged) {
-                    this.value = update.state.doc.toString();
+                    const value = update.state.doc.toString();
+                    this.value = value;
+                        this.dispatchEvent(new CustomEvent('value-changed', {
+                        detail: { value },
+                        bubbles: true,
+                        composed: true
+                    }));
                 }
             }),
             this.editable ? [] : EditorState.readOnly.of(true)
