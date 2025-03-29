@@ -1,9 +1,15 @@
 import { LitElement, html, css } from 'lit';
-import {EditorState} from "@codemirror/state"
-import {EditorView, lineNumbers, keymap, highlightActiveLineGutter, highlightSpecialChars } from "@codemirror/view"
-import {defaultKeymap} from "@codemirror/commands"
+import {EditorState} from "@codemirror/state";
+import {EditorView, lineNumbers, keymap, highlightActiveLineGutter, highlightSpecialChars } from "@codemirror/view";
+import {defaultKeymap, indentWithTab} from "@codemirror/commands";
+import {autocompletion} from '@codemirror/autocomplete';
 import { xml } from '@codemirror/lang-xml';
 import { javascript } from '@codemirror/lang-javascript';
+import { php } from '@codemirror/lang-php';
+import { cpp } from '@codemirror/lang-cpp';
+import { go } from '@codemirror/lang-go';
+import { rust } from '@codemirror/lang-rust';
+import { python } from '@codemirror/lang-python';
 import { json } from '@codemirror/lang-json';
 import { java } from '@codemirror/lang-java';
 import { sql } from '@codemirror/lang-sql';
@@ -11,8 +17,10 @@ import { yaml } from '@codemirror/lang-yaml';
 import { html as htmlLanguage } from '@codemirror/lang-html';
 import { css as cssLanguage } from '@codemirror/lang-css';
 import { sass } from '@codemirror/lang-sass';
+import { less } from '@codemirror/lang-less';
 import { markdown } from '@codemirror/lang-markdown';
-import { StreamLanguage } from "@codemirror/language"
+import { asciidoc } from "codemirror-asciidoc";
+import { StreamLanguage } from "@codemirror/language";
 import { properties } from './properties.js';
 import { asciiArmor } from './asciiarmor.js';
 import { powerShell } from './powershell.js';
@@ -155,9 +163,11 @@ class QuiCodeBlock extends LitElement {
             this._basicTheme,
             highlightActiveLineGutter(),
             highlightSpecialChars(),
+            autocompletion(),
             EditorView.lineWrapping,
             keymap.of([
                 { key: "Shift-Enter", run: shiftEnterCommand },
+                indentWithTab,
                 ...defaultKeymap
               ]),
             EditorView.updateListener.of((update) => {
@@ -249,6 +259,21 @@ class QuiCodeBlock extends LitElement {
                 return java();
             case 'sql':
                 return sql();
+            case 'go':
+            case 'golang':
+                return go();
+            case 'rust':
+            case 'rs':    
+                return rust();    
+            case 'php':
+                return php();
+            case 'h':    
+            case 'cpp':
+            case 'c++':
+                return cpp();         
+            case 'py':
+            case 'python':
+                return python();        
             case 'yaml':
             case 'yml':
                 return yaml();
@@ -261,9 +286,14 @@ class QuiCodeBlock extends LitElement {
             case 'markdown':
             case 'md':
                 return markdown();
+            case 'adoc':
+            case 'asciidoc':
+                return StreamLanguage.define(asciidoc);
             case 'scss':    
             case 'sass':
                 return sass();
+            case 'less':    
+                return less();    
             case 'asc':
                 return StreamLanguage.define(asciiArmor);
             case 'properties':
