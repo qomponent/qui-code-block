@@ -751,6 +751,145 @@ foo: 'bar'" theme="dark" class="toggle"></qui-code-block>
     </div>
     <br/>
 
+    <h4>Go:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="go" content='package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("hello world")
+}' theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="go" content='package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("hello world")
+}' theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+    <br/>
+
+    <h4>PHP:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="php" content='
+&lt;?php
+
+echo "Hello World!";
+
+?&gt;
+' theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="php" content='
+&lt;?php
+
+echo "Hello World!";
+
+?&gt;
+        ' theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+    <br/>
+
+    <h4>C++:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="cpp" content='
+#include <iostream>
+
+int main() {
+    std::cout << "Hello World!";
+    return 0;
+}
+' theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="cpp" content='
+#include <iostream>
+
+int main() {
+    std::cout << "Hello World!";
+    return 0;
+}
+        ' theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+    <br/>
+
+    <h4>Rust:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="rs" content='
+fn main() {
+  println!("Hello World!");
+}
+' theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="rs" content='
+fn main() {
+  println!("Hello World!");
+}
+        ' theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+    <br/>
+    <h4>Python:</h4>
+
+    <div class="inout">
+      <div class="card">
+        This code: 
+        <qui-code-block mode="html" theme="dark">
+          <slot>
+&lt;qui-code-block mode="py" content="
+print('Hello, world!')
+" theme="dark"&gt;&lt;/qui-code-block&gt;
+          </slot>
+        </qui-code-block>
+      </div>
+      <div class="card">
+        Will create this output:
+        <qui-code-block mode="py" content="
+print('Hello, world!')
+        " theme="dark" class="toggle"></qui-code-block>
+      </div>
+    </div>
+    <br/>
+
 
     <h3 id="editable">Editable code blocks</h3>
 
@@ -781,6 +920,61 @@ foo = bar
 
     
     <br/>
+
+    <div class="inout">
+      <div class="card">
+    This code:
+    <qui-code-block mode="html" theme="dark">
+      <slot>
+&lt;qui-code-block mode="html" theme="dark" editable&gt;
+  &lt;slot&gt;
+    // Type some html here
+  &lt;/slot&gt;
+&lt;/qui-code-block&gt;
+      </slot>
+    </qui-code-block>
+      </div>
+
+      <div class="card">
+    Will create this output:
+    <qui-code-block mode="html" theme="dark" class="toggle" editable>
+      <slot>
+// Type some html here
+      </slot>
+    </qui-code-block>
+    </div>
+    </div>
+
+    
+    <br/>
+
+    <div class="inout">
+      <div class="card">
+    This code:
+    <qui-code-block mode="html" theme="dark">
+      <slot>
+&lt;qui-code-block mode="js" theme="dark" editable&gt;
+  &lt;slot&gt;
+    // Type some JavaScript here
+  &lt;/slot&gt;
+&lt;/qui-code-block&gt;
+      </slot>
+    </qui-code-block>
+      </div>
+
+      <div class="card">
+    Will create this output:
+    <qui-code-block mode="js" theme="dark" class="toggle" editable>
+      <slot>
+// Type some JavaScript here
+      </slot>
+    </qui-code-block>
+    </div>
+    </div>
+
+    
+    <br/>
+
 
     <script>
 
