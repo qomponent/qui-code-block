@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import {EditorState} from "@codemirror/state";
 import {EditorView, lineNumbers, keymap, highlightActiveLineGutter, highlightSpecialChars } from "@codemirror/view";
-import {defaultKeymap, indentWithTab} from "@codemirror/commands";
+import {defaultKeymap, indentWithTab, undo, redo, history} from "@codemirror/commands";
 import {autocompletion} from '@codemirror/autocomplete';
 import { xml } from '@codemirror/lang-xml';
 import { javascript } from '@codemirror/lang-javascript';
@@ -41,8 +41,8 @@ class QuiCodeBlock extends LitElement {
             display: block;
             height: 100%;
         }
-
-        #codeMirrorContainer {
+        
+        #codeMirrorContainer, .cm-editor {
             height: 100%;
         }
 
@@ -159,6 +159,7 @@ class QuiCodeBlock extends LitElement {
         };
 
         const conf = [
+            history(),
             this._detectMode(), 
             this._basicTheme,
             highlightActiveLineGutter(),
@@ -168,8 +169,11 @@ class QuiCodeBlock extends LitElement {
             keymap.of([
                 { key: "Shift-Enter", run: shiftEnterCommand },
                 indentWithTab,
-                ...defaultKeymap
-              ]),
+                ...defaultKeymap,
+                { key: "Mod-z", run: undo },      // Undo
+                { key: "Mod-y", run: redo },      // Redo
+                { key: "Mod-Shift-z", run: redo } // Redo (macOS)
+            ]),
             EditorView.updateListener.of((update) => {
                 if (update.docChanged) {
                     const value = update.state.doc.toString();
